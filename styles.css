@@ -1,0 +1,333 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+:root {
+  --white: hsl(0deg 0% 94%);
+  --red: hsl(352deg 59% 47%);
+  --blue: hsl(222deg 29% 38%);
+  --gray: linear-gradient(60deg, hsl(0, 0%, 25%) 30%, hsl(0, 0%, 10%) 70%);
+}
+
+/* Set font size for easy rem calculations
+ * default document font size = 16px, 1rem = 16px, 100% = 16px
+ * (100% / 16px) * 10 = 62.5%, 1rem = 10px, 62.5% = 10px
+*/
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+/* A few media query to set some font sizes at different screen sizes.
+ * This helps automate a bit of responsiveness.
+ * The trick is to use the rem unit for size values, margin and padding.
+ * Because rem is relative to the document font size
+ * when we scale up or down the font size on the document
+ * it will affect all properties using rem units for the values.
+*/
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media (max-width: 980px) {
+  html {
+    font-size: 58%;
+  }
+}
+
+@media (max-width: 460px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--white);
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  max-height: 75.5px;
+  background-color: var(--red);
+  box-shadow: 0 2px hsla(0, 0%, 0%, 0.4);
+}
+
+#navbar ul {
+  display: flex;
+  margin-right: 2rem;
+}
+
+@media (max-width: 460px) {
+  #navbar {
+    justify-content: center;
+  }
+
+  #navbar ul {
+    margin: 0 1rem;
+  }
+}
+
+a {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: var(--white);
+  display: block;
+  padding: 2rem;
+  font-size: 2.2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+#navbar a:hover {
+  background-color: var(--blue);
+  transition: background-color 0.4s;
+}
+
+#welcome-section {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  background-image: var(--gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#welcome-section h1,
+h2 {
+  font-size: 6rem;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+#welcome-section p {
+  font-size: 3rem;
+  color: var(--red);
+  font-style: italic;
+}
+
+#projects {
+  background-color: var(--blue);
+  padding: 10rem 2rem;
+  text-align: center;
+}
+
+#projects h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 4.2rem;
+  border-bottom: 0.2rem solid var(--white);
+  max-width: 640px;
+  margin: 0 auto 6rem;
+}
+
+@media (max-width: 460px) {
+  #projects h2 {
+    font-size: 4rem;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 4rem;
+  margin: 0 auto 6rem;
+  width: 100%;
+  max-width: 1280px;
+}
+
+@media (max-width: 490px) {
+  #projects {
+    padding: 6rem 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-tile {
+  background-image: var(--gray);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 2px;
+  padding: 2rem 1.5rem;
+  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
+  text-transform: capitalize;
+  position: relative;
+}
+
+.project-tile::before {
+  content: "";
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  border-radius: 2px;
+  background-image: linear-gradient(
+    90deg,
+    #f44336,
+    #e91e63,
+    #e91e63,
+    #9c27b0,
+    #9c27b0,
+    #673ab7,
+    #673ab7,
+    #3f51b5,
+    #3f51b5,
+    #2196f3,
+    #2196f3,
+    #03a9f4,
+    #03a9f4,
+    #00bcd4,
+    #00bcd4,
+    #009688,
+    #009688,
+    #4caf50
+  );
+}
+
+.project-tile img {
+  width: 100%;
+  height: calc(100% - 6.8rem);
+  display: block;
+  object-fit: cover;
+}
+
+.project-tile p {
+  font-size: 2rem;
+  position: relative;
+  top: 2rem;
+}
+
+.project-tile p::before {
+  content: "<";
+  margin-right: 0.8rem;
+}
+
+.project-tile p::after {
+  content: "/>";
+  margin-left: 0.8rem;
+}
+
+.project-tile p::before,
+.project-tile p::after {
+  color: transparent;
+}
+
+.project-tile:hover p::before,
+.project-tile:hover p::after {
+  color: #ff7f50;
+  transition: color 0.5s ease-out;
+}
+
+.project-tile:hover p::before {
+  animation: code-left 1s forwards;
+}
+
+@keyframes code-left {
+  0% {
+    margin-right: -0.8rem;
+  }
+}
+
+.project-tile:hover p::after {
+  animation: code-right 1s forwards;
+}
+
+@keyframes code-right {
+  0% {
+    margin-left: -0.8rem;
+  }
+}
+
+.btn-link {
+  background-color: hsl(212deg 15% 22%);
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  font-size: 2rem;
+  transition: background-color 0.5s ease-out;
+}
+
+.btn-link:hover {
+  background-color: var(--red);
+}
+
+.btn-link i {
+  margin-left: 10px;
+  transform: translateX(0);
+  transition: transform 0.5s ease-out;
+}
+
+.btn-link:hover i {
+  transform: translateX(2px);
+}
+
+#contact {
+  background-image: var(--gray);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-header p {
+  font-style: italic;
+}
+
+@media (max-width: 460px) {
+  #contact .contact-header > h2 {
+    font-size: 4rem;
+  }
+}
+
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-top: 12rem;
+  width: 100%;
+  max-width: 980px;
+}
+
+.contact-links li a {
+  font-size: 2.4rem;
+  text-shadow: 2px 2px 1px #1f1f1f;
+  display: inline-block;
+  padding: 1rem 0;
+  width: 100%;
+  border-radius: 2px;
+  transition: transform 0.3s ease-out;
+}
+
+.contact-links li a:hover {
+  transform: translateY(8px);
+}
+
+@media (max-width: 427px) {
+  .contact-links {
+    gap: 1rem;
+    margin-top: 5rem;
+  }
+}
